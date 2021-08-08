@@ -1,0 +1,133 @@
+CanvasExample7:
+<CanvasExample7>:
+    BoxLayout
+        orientation: 'vertical'
+        RelativeLayout:
+            canvas:
+                Color: 
+                    rgb: .97,.30,.18 # bdhiya color
+                Rectangle: 
+                    size: self.size
+        RelativeLayout:
+            canvas:
+                Color: 
+                    rgb: 1,1,1 # bdhiya color
+                Rectangle: 
+                    size: self.size
+        RelativeLayout:
+            canvas:
+                Color: 
+                    rgb: 0,1,0 # bdhiya color
+                Rectangle: 
+                    size: self.size
+
+
+#CanvasExample6_1:
+<CanvasExample6_1>:
+    
+    BoxLayout
+        # By default button left below corner pr chhote se hote hai
+        size: root.size # yh windnow size me arrannge kr deta h
+        #Button:
+        #    text: "A"
+        #Button:
+        #    text: "B"
+        
+        Widget:
+            canvas:
+                Color: 
+                    rgb: 1,1,0 # yellow
+                Rectangle: 
+                    size: self.size
+        RelativeLayout:
+        #Widget:
+            canvas:
+                Color: 
+                    rgb: 1,0,1 # bdhiya color
+                Rectangle: 
+                    size: self.size
+                    
+                    #pos: self.pos # Automatically screen me fit kr dega
+                    # We do same thing with relative layout    
+                
+
+#CanvasExample6:
+<CanvasExample6>:
+    Button:
+        #Button is a widget so we cann use canvas inside it 
+        #canvas.before: # by default after hota hai
+            #Rectangle: #this cover the button
+        text: "A"
+        pos: 100,100    # only button(text) changes pos not canvas
+        # canvas always atr 
+
+                
+
+#CanvasExample5:
+<CanvasExample5>:
+
+
+
+#CanvasExample4_1:
+<CanvasExample4_1>:
+    Button:
+        pos: 100,400
+        text: "Press"
+        on_press: root.move_rectangle()
+
+
+#CanvasExample4:
+<CanvasExample4>:
+
+
+
+#CanvasExample3:
+<CanvasExample3>:
+    canvas:
+        # here Color is global property
+        Color:
+        # by default a=1
+            rgba: 1,0,0,0.5 #rgb: 1,0,0
+        Line:
+            circle: (100,200,100) # center_x, center_y, radius
+            width: 3
+        Color:
+            rgb: 1,0.5,0
+        Line:
+            ellipse: (300,200,100,200) # center_x, center_y, radius_x, radius_y
+            width: 3
+        Line:
+            rectangle: (500,100,100,150) # x,y, w,h
+            width: 3
+#CanvasExample2:
+<CanvasExample2>:
+    canvas:
+        Line:
+            points:(0,self.height/2,self.width, self.height/2)
+        Line:
+            points:(self.width/2 ,0, self.width/2, self.height)
+
+
+
+#CanvasExample1:
+# Variables in .kv file
+#: set s dp(150) 
+<CanvasExample1>:
+#Don't forget indentation
+    canvas:
+        Rectangle:
+
+            # self.center se below-left corner center pr hoga
+            pos: self.center_x-s/2, self.center_y-s/2 #dp(100), dp(200)
+            size: s,s #dp(150), dp(150)
+
+        Ellipse:
+            pos: 100, 300
+            size: s, s/2 # s= width, s/2 height    
+
+        Line: 
+            #points: (0, 0, 100,100, 200,0, self.width, 100, 200, self.height)  # (x1, y1) -> (x2, y2) -> (x3, y3) .. . 
+            points: (0, 0, self.width/4,100, self.width/2,0, self.width*3/4, 100, self.width,0)  # (x1, y1) -> (x2, y2) -> (x3, y3) .. . 
+            
+            width: 3 # Line ki motai
+
