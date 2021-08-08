@@ -1,0 +1,201 @@
+# Interface
+ImageExample:
+
+<ImageExample@GridLayout>:
+    cols: 3
+    Image:  # by default image stretch nhi hota
+        source: "images/cake.jpg"
+    Image:  
+        source: "images/cake.jpg"
+        allow_stretch: True
+    Image:  
+        source: "images/cake.jpg"
+        keep_ratio: False   # ratio gdbd hoga
+        allow_stretch: True 
+
+
+#WidgetExample:
+
+<WidgetExample>:
+    cols: 3
+    ToggleButton:   # Like a switch on/off
+        text: "Toggle"
+        on_state: root.on_toggle_button_state(self)
+        size_hint: None, 1
+        width: "100dp"
+    Button:     # Just click
+        text: "Click here"
+        on_press: root.on_button_click() # root is for using the .py property
+        # don't forget parannthesis on above
+        disabled: not root.count_enabled # if true button is disable
+    Label:
+        text: root.my_text
+        font_name: "fonts/Lcd.ttf"
+        font_size: "80dp"
+        color: 1, .5, 1, 1 
+    Switch:
+        id: my_switch # iske use se hm sara ka .kv file me hi kr skte hai
+        on_active: root.on_switch_active(self) # jb active ho tb kya kre.
+        size_hint: None, 1
+        width: "100dp"
+        active: True
+
+    Slider:
+        id: my_slider # for shortcut tarika iska use kr hm .kv file me hi value le skte hai
+        min: 0      # by default min=0,max=100
+        max: 100
+        value: 50 # starting me kis value pr ho
+        orientation: "vertical" # default horizontal
+        disabled: not my_switch.active
+        #on_value: root.on_slider_value(self)
+    #Label:
+    #    text: root.slider_text
+    #    font_name: "fonts/Lcd.ttf"
+    #    font_size: "80dp"
+    #    color: .5, 1, 1, 1
+    
+    BoxLayout:
+        orientation: "vertical"
+        # shortcut tarika
+        Label:
+            text: str(int (my_slider.value))
+            font_name: "fonts/Lcd.ttf"
+            font_size: "80dp"
+            color: .5, 1, 1, 1
+        ProgressBar:    # min = 0 always
+            max: 100    
+            value: my_slider.value
+    TextInput:
+        id: my_text_input
+        size_hint: None, 1
+        width: "100dp"
+        text: "Default"
+        multiline: False # hm new line pr nhi jayyenge enter press krne pr bhi
+        on_text_validate: root.on_text_validate(self)
+    Label:
+        text: "Your name is : "+root.text_input    #root.text_input    
+                
+
+#PageLayoutExample:
+
+<PageLayoutExample@PageLayout>
+    MainWidget:
+    BoxLayoutExample:
+    AnchorLayoutExample: 
+    GridLayoutExample:
+
+
+
+#ScrollView work with all layout but the only point is 
+# that you should declare the size
+<ScrollViewExample@ScrollView>:
+    StackLayoutExample:
+        size_hint: 1, None
+        #height: 4000 # As we donnt know height so taken random a large value
+        # because on changing the screen size the  height of items will channge
+        height: self.minimum_height # this will take minimum height automatically 
+        # according to screen size 
+
+<StackLayoutExample>: #it stack item in multiple line
+# you need to give size for each item and each may have different size
+    
+    # left-right top-bottom, or vice -versa
+    #orientation: "lr-bt"
+    #padding: ("28dp","28dp", "28dp","28dp")
+
+    #spacing: "40dp", "20dp"
+
+
+
+#GridLayoutExample: 
+
+<GridLayoutExample@GridLayout>: # if you are not declaring class in .py file
+    
+    # Must Give number of row/column
+    rows: 2
+    #cols: 3
+    Button:
+        text: 'A'
+        size_hint: None,1 # it will not work untill the all column size is not changed 
+        width: "60dp" # fixed width
+    BoxLayoutExample:
+    Button:
+        text: 'C'
+    Button:
+        text: 'D'
+        size_hint: None,1
+        width: "60dp" # fixed width
+    Button:
+        text: 'E'
+    Button:
+        text: 'F'
+        
+
+
+
+<AnchorLayoutExample>:
+    # by default Button screen ke center me hoga
+    # right, left, center
+    anchor_x: "left"
+    
+    # bottom, top, center
+    anchor_y: "top"
+    BoxLayout: # to show more than one button use BoxLayout
+        size_hint: .2,.2 # Boxe layout proportion
+        Button:
+            text: 'A'
+            #size_hint: 0.1, 0.1 # particular button size
+        # its not like box layout stacking
+        # the second button will overlap the first one
+        Button:
+            text: 'B'
+            size_hint: 0.7, 1 # particular button size
+
+
+#BoxLayoutExample:
+<BoxLayoutExample>:
+    #orientation: 'vertical' # By default this is horizontal stacking
+    Button:
+        text: 'A'
+        size_hint: 0.5, 0.5
+        pos_hint: {'center_y': 0.5}
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: '10dp'
+        Button:
+            text: 'B1'
+        Button:
+            text: 'B2'
+        Button:
+            text: 'B3'
+        Button:
+            text: 'B4'
+            
+    Label:
+        text: 'C'
+        
+
+
+
+# Follow indetation rule here
+#MainWidget:
+<MainWidget>:
+    Button: 
+        text: "Shubham" # hello
+        #size: 100, 200  # Yh size pixel me hai
+            # ? So there is possibility that kisi me bda dikhe and kisi me chhota
+            # ? According to pixel density
+        #pos: 100,200    # position bhi aisa hos kta hai
+
+            # -So we are using following syntax that's depends on_press: 
+            # -Only physical device screen
+        size: "100dp", "200dp"
+        pos: "100dp", "200dp"
+            # color: r, g, b, a between 0-1
+        color: 0, 0, 1, 1
+
+    Label:  # just text showing on screen not active(interactive)
+        text: "Gurukul Label"
+        size: "100dp", "80dp"
+        pos: "200dp", "200dp"
+        color: 1, 0, 0, 1
